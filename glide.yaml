@@ -1,0 +1,12 @@
+package: github.com/levigross/mabul
+import:
+- package: go.uber.org/zap
+  version: ^1.0.0-rc.2
+- package: github.com/valyala/fasthttp
+  version: ^20160617.0.0
+- package: github.com/klauspost/compress
+  version: ^1.2.1
+  subpackages:
+  - '...'
+- package: go.uber.org/atomic
+  version: ^1.0.0
