@@ -1,10 +1,22 @@
-hash: 975bf57d822cf66c677118357bfa50826cde972cc5f267803a421196cd3e7170
-updated: 2017-03-06T19:08:54.472164073-05:00
+hash: 83b250ba8041415eccccb1c39ca1cfedf71231af1c300975ba83495afbc5b569
+updated: 2017-03-09T13:55:40.901113189-05:00
 imports:
+- name: github.com/aead/chacha20
+  version: d31a916ded42d1640b9d89a26f8abd53cc96790c
+  subpackages:
+  - chacha
 - name: github.com/fsnotify/fsnotify
-  version: fd9ec7deca8bf46ecd2a795baaacf2b3a9be1197
+  version: 629574ca2a5df945712d3079857300b5e4da0236
+- name: github.com/google/gopacket
+  version: 84db73380852e283a2aa5082a29a84e148b5c987
+  subpackages:
+  - layers
+- name: github.com/hashicorp/golang-lru
+  version: 0a025b7e63adc15a622f29b0b2c4c3848243bbf6
+  subpackages:
+  - simplelru
 - name: github.com/hashicorp/hcl
-  version: 8fa153c5b4e9d1ccecda7075821ffc7c1f6d912b
+  version: 37ab263305aaeb501a60eb16863e808d426e37f2
   subpackages:
   - hcl/ast
   - hcl/parser
@@ -26,30 +38,42 @@ imports:
 - name: github.com/klauspost/cpuid
   version: 09cded8978dc9e80714c4d85b0322337b0a1e5e0
 - name: github.com/klauspost/crc32
-  version: 1bab8b35b6bb565f92cbc97939610af9369f942a
-- name: github.com/kr/fs
-  version: 2788f0dbd16903de03cb8186e5c7d97b69ad387b
+  version: cb6bfca970f6908083f26f39a79009d608efd5cd
+- name: github.com/lucas-clemente/aes12
+  version: 25700e67be5c860bcc999137275b9ef8b65932bd
+- name: github.com/lucas-clemente/fnv128a
+  version: 393af48d391698c6ae4219566bfbdfef67269997
+- name: github.com/lucas-clemente/quic-go
+  version: 1b8334c3442cdf14424d6716064d30879f6209fe
+  subpackages:
+  - ackhandler
+  - congestion
+  - crypto
+  - flowcontrol
+  - frames
+  - h2quic
+  - handshake
+  - protocol
+  - qerr
+  - utils
+- name: github.com/lucas-clemente/quic-go-certificates
+  version: d2f86524cced5186554df90d92529757d22c1cb6
 - name: github.com/magiconair/properties
-  version: 0723e352fa358f9322c938cc2dadda874e9151a9
+  version: 9c47895dc1ce54302908ab8a43385d1f5df2c11c
 - name: github.com/mitchellh/mapstructure
   version: f3009df150dadf309fdee4a54ed65c124afad715
 - name: github.com/pelletier/go-buffruneio
   version: df1e16fde7fc330a0ca68167c23bf7ed6ac31d6d
 - name: github.com/pelletier/go-toml
-  version: 45932ad32dfdd20826f5671da37a5f3ce9f26a8d
-- name: github.com/pkg/errors
-  version: 248dadf4e9068a0b3e79f02ed0a610d935de5302
-- name: github.com/pkg/sftp
-  version: 4d0e916071f68db74f8a73926335f809396d6b42
+  version: d464759235b8fd59f8ab4c44807d7c36e1678add
 - name: github.com/spf13/afero
-  version: 52e4a6cfac46163658bd4f123c49b6ee7dc75f78
+  version: 06b7e5f50606ecd49148a01a6008942d9b669217
   subpackages:
   - mem
-  - sftp
 - name: github.com/spf13/cast
-  version: 2580bc98dc0e62908119e4737030cc2fdfc45e4c
+  version: 24b6558033ffe202bf42f0f3b870dcc798dd2ba8
 - name: github.com/spf13/cobra
-  version: 6e91dded25d73176bf7f60b40dd7aa1f0bf9be8d
+  version: 9495bc009a56819bdb0ddbc1a373e29c140bc674
 - name: github.com/spf13/jwalterweatherman
   version: 33c24e77fb80341fe7130ee7c594256ff08ccc46
 - name: github.com/spf13/pflag
@@ -63,26 +87,32 @@ imports:
 - name: go.uber.org/atomic
   version: 0c9e689d64f004564b79d9a663634756df322902
 - name: go.uber.org/zap
-  version: a03b90bc236f3def382f17743518889a31f8187c
+  version: 4e517d38b2138e59475d6468e7a6b626eecdaa66
   subpackages:
   - buffer
   - internal/bufferpool
+  - internal/color
   - internal/exit
   - internal/multierror
   - zapcore
 - name: golang.org/x/crypto
-  version: b2fa06b6af4b7c9bfeb8569ab7b17f04550717bf
+  version: 9477e0b78b9ac3d0b03822fd95422e2fe07627cd
   subpackages:
   - curve25519
-  - ed25519
-  - ed25519/internal/edwards25519
-  - ssh
+  - hkdf
+- name: golang.org/x/net
+  version: a6577fac2d73be281a500b310739095313165611
+  subpackages:
+  - http2
+  - http2/hpack
+  - idna
+  - lex/httplex
 - name: golang.org/x/sys
-  version: c200b10b5d5e122be351b67af224adc6128af5bf
+  version: ca83bd2cb9abb47839b50eb4da612f00158f5870
   subpackages:
   - unix
 - name: golang.org/x/text
-  version: a8b38433e35b65ba247bb267317037dee1b70cea
+  version: 5c6cf4f9a2357d38515014cea8c488ed22bdab90
   subpackages:
   - transform
   - unicode/norm

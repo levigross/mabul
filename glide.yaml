@@ -10,3 +10,15 @@ import:
   - '...'
 - package: go.uber.org/atomic
   version: ^1.0.0
+- package: golang.org/x/sys
+  subpackages:
+  - unix
+- package: github.com/google/gopacket
+- package: github.com/lucas-clemente/quic-go
+  version: master
+- package: github.com/lucas-clemente/aes12
+- package: github.com/lucas-clemente/quic-go-certificates
+- package: golang.org/x/net
+  version: master
+  subpackages:
+  - http2

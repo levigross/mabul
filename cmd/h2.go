@@ -23,7 +23,7 @@ import (
 // h2Cmd represents the h2 command
 var h2Cmd = &cobra.Command{
 	Use:   "h2",
-	Short: "A brief description of your command",
+	Short: "Conducts connection attacks using H2",
 	Long: `A longer description that spans multiple lines and likely contains examples
 and usage of using your command. For example:
 

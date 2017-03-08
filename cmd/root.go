@@ -17,14 +17,10 @@ package cmd
 import (
 	"fmt"
 	"os"
-	"strings"
 
 	"github.com/levigross/mabul/base"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
-
-	"go.uber.org/zap"
-	"go.uber.org/zap/zapcore"
 )
 
 var target base.Target
@@ -64,9 +60,6 @@ func init() {
 	RootCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 
 	RootCmd.PersistentFlags().StringVar(&loggingLevel, "logLevel", "info", "The level of logging you wish to have")
-	RootCmd.PersistentFlags().StringVarP(&target.DomainName, "domainName", "d", "", "The domain name you wish to flood")
-	RootCmd.PersistentFlags().IPVar(&target.IPAddress, "ip", nil, "The IP address you wish to target")
-	RootCmd.PersistentFlags().IntVarP(&target.Port, "port", "p", 0, "The port you wish to target")
 }
 
 // initConfig reads in config file and ENV variables if set.
@@ -83,26 +76,4 @@ func initConfig() {
 	if err := viper.ReadInConfig(); err == nil {
 		fmt.Println("Using config file:", viper.ConfigFileUsed())
 	}
-}
-
-func parseLogLevel() zapcore.Level {
-	switch strings.ToLower(loggingLevel) {
-	case "debug":
-		return zap.DebugLevel
-	case "info":
-		return zap.InfoLevel
-	default:
-		return zap.WarnLevel
-	}
-}
-
-func setupLogging() *zap.SugaredLogger {
-	loggingConfig := zap.NewDevelopmentConfig()
-	loggingConfig.Level.SetLevel(parseLogLevel())
-	logger, err := loggingConfig.Build()
-	if err != nil {
-		fmt.Println("Unable to create logger", err)
-		os.Exit(-1)
-	}
-	return logger.Sugar()
 }

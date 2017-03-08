@@ -57,4 +57,5 @@ func init() {
 	httpCmd.Flags().IntVar(&httpAttack.ErrorThreshold, "errorThreshold", 50,
 		"The precentage of errors you are willing to enjoy - use -1 for unlimited")
 	httpCmd.Flags().StringVar(&httpAttack.URL, "url", "http://localhost:8000/", "The URL you wish to attack")
+	httpCmd.Flags().BoolVar(&httpAttack.Quic, "quic", false, "conduct the attack using QUIC")
 }

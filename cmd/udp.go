@@ -15,15 +15,19 @@
 package cmd
 
 import (
-	"fmt"
+	"os"
+	"time"
 
+	"github.com/levigross/mabul/udp"
 	"github.com/spf13/cobra"
 )
+
+var udpAttackConfig udp.AttackConfig
 
 // udpCmd represents the udp command
 var udpCmd = &cobra.Command{
 	Use:   "udp",
-	Short: "A brief description of your command",
+	Short: "Launches UDP style attacks",
 	Long: `A longer description that spans multiple lines and likely contains examples
 and usage of using your command. For example:
 
@@ -31,22 +35,22 @@ Cobra is a CLI library for Go that empowers applications.
 This application is a tool to generate the needed files
 to quickly create a Cobra application.`,
 	Run: func(cmd *cobra.Command, args []string) {
-		// TODO: Work your own magic here
-		fmt.Println("udp called")
+		udpAttacker := &udp.Attacker{
+			Config: &udpAttackConfig,
+			Target: target,
+			Log:    setupLogging(),
+		}
+		if err := udpAttacker.Attack(&target); err != nil {
+			udpAttacker.Log.Info("Unable to execute attack: ", err)
+			os.Exit(-1)
+		}
 	},
 }
 
 func init() {
 	RootCmd.AddCommand(udpCmd)
+	addTargetFlags(udpCmd)
 
-	// Here you will define your flags and configuration settings.
-
-	// Cobra supports Persistent Flags which will work for this command
-	// and all subcommands, e.g.:
-	// udpCmd.PersistentFlags().String("foo", "", "A help for foo")
-
-	// Cobra supports local flags which will only run when this command
-	// is called directly, e.g.:
-	// udpCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
-
+	udpCmd.Flags().DurationVar(&udpAttackConfig.AttackDuration, "attackDuration", time.Second*10, "Attack time duration")
+	udpCmd.Flags().UintVar(&udpAttackConfig.NumThreads, "numThreads", 10, "Number of threads")
 }

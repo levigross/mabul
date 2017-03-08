@@ -1,14 +1,14 @@
 package http
 
 import (
+	"context"
 	"io"
 	"io/ioutil"
 	"net"
 	"net/http"
 	"time"
 
-	"context"
-
+	"github.com/lucas-clemente/quic-go/h2quic"
 	"github.com/valyala/fasthttp"
 )
 
@@ -68,18 +68,24 @@ var _ GetFloodAttack = &RegHTTPGet{}
 // SetAttacker ....
 func (r *RegHTTPGet) SetAttacker(a *Attacker) {
 	r.attacker = a
-	r.client = &http.Client{
-		Transport: &http.Transport{
-			Proxy: http.ProxyFromEnvironment,
-			DialContext: (&net.Dialer{
-				Timeout:   r.attacker.Config.Timeout,
-				KeepAlive: 30 * time.Second,
-			}).DialContext,
-			MaxIdleConns:          100,
-			IdleConnTimeout:       r.attacker.Config.Timeout,
-			TLSHandshakeTimeout:   r.attacker.Config.Timeout,
-			ExpectContinueTimeout: r.attacker.Config.Timeout,
-		},
+	if a.Config.Quic {
+		r.client = &http.Client{
+			Transport: &h2quic.QuicRoundTripper{},
+		}
+	} else {
+		r.client = &http.Client{
+			Transport: &http.Transport{
+				Proxy: http.ProxyFromEnvironment,
+				DialContext: (&net.Dialer{
+					Timeout:   r.attacker.Config.Timeout,
+					KeepAlive: 30 * time.Second,
+				}).DialContext,
+				MaxIdleConns:          100,
+				IdleConnTimeout:       r.attacker.Config.Timeout,
+				TLSHandshakeTimeout:   r.attacker.Config.Timeout,
+				ExpectContinueTimeout: r.attacker.Config.Timeout,
+			},
+		}
 	}
 }
 

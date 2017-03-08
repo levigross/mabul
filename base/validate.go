@@ -1,6 +1,7 @@
 package base
 
 import (
+	"errors"
 	"fmt"
 	"net"
 )
@@ -14,15 +15,16 @@ var _ Validator = (*Target)(nil)
 
 // Target has some basic details about our target
 type Target struct {
-	DomainName string
-	IPAddress  net.IP
-	Port       int // 0 means randomize
+	DomainName    string
+	IPAddress     net.IP
+	DstPort       uint16 // 0 means randomize
+	InterfaceName string
 }
 
 // Validate will validate the target information
 func (t *Target) Validate() error {
 	if t.DomainName == "" && t.IPAddress == nil {
-		return fmt.Errorf("You must choose either a domain or IP to attack")
+		return errors.New("You must choose either a domain or IP to attack")
 	}
 	if t.DomainName != "" {
 		ips, err := net.LookupIP(t.DomainName)
@@ -30,6 +32,12 @@ func (t *Target) Validate() error {
 			return err
 		}
 		t.IPAddress = ips[0]
+	}
+
+	if t.InterfaceName != "" {
+		if _, err := net.InterfaceByName(t.InterfaceName); err != nil {
+			return fmt.Errorf("InterfaceByName: %v", err)
+		}
 	}
 	return nil
 }
