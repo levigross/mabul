@@ -22,3 +22,5 @@ import:
   version: master
   subpackages:
   - http2
+- package: github.com/levigross/connectors
+- package: github.com/levigross/gboringssltls

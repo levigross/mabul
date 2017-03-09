@@ -72,20 +72,20 @@ func (r *RegHTTPGet) SetAttacker(a *Attacker) {
 		r.client = &http.Client{
 			Transport: &h2quic.QuicRoundTripper{},
 		}
-	} else {
-		r.client = &http.Client{
-			Transport: &http.Transport{
-				Proxy: http.ProxyFromEnvironment,
-				DialContext: (&net.Dialer{
-					Timeout:   r.attacker.Config.Timeout,
-					KeepAlive: 30 * time.Second,
-				}).DialContext,
-				MaxIdleConns:          100,
-				IdleConnTimeout:       r.attacker.Config.Timeout,
-				TLSHandshakeTimeout:   r.attacker.Config.Timeout,
-				ExpectContinueTimeout: r.attacker.Config.Timeout,
-			},
-		}
+		return
+	}
+	r.client = &http.Client{
+		Transport: &http.Transport{
+			Proxy: http.ProxyFromEnvironment,
+			DialContext: (&net.Dialer{
+				Timeout:   r.attacker.Config.Timeout,
+				KeepAlive: 30 * time.Second,
+			}).DialContext,
+			MaxIdleConns:          100,
+			IdleConnTimeout:       r.attacker.Config.Timeout,
+			TLSHandshakeTimeout:   r.attacker.Config.Timeout,
+			ExpectContinueTimeout: r.attacker.Config.Timeout,
+		},
 	}
 }
 

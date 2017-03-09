@@ -11,6 +11,6 @@ func errorsToHigh(errorRate uint64, requestCount uint, errorThreshold int) (bool
 	if errorThreshold == -1 { // Ignore errors
 		return false, 0.0
 	}
-	precentage := (float64(errorRate) / float64(requestCount)) * float64(100)
-	return int(precentage) >= errorThreshold, precentage
+	percentage := (float64(errorRate) / float64(requestCount)) * float64(100)
+	return int(percentage) >= errorThreshold, percentage
 }

@@ -1,5 +1,5 @@
-hash: 83b250ba8041415eccccb1c39ca1cfedf71231af1c300975ba83495afbc5b569
-updated: 2017-03-09T13:55:40.901113189-05:00
+hash: 1a63025394e297248efd042495e81023e74235b19fddcf4424c1a4871da79031
+updated: 2017-03-09T17:34:11.016485414-05:00
 imports:
 - name: github.com/aead/chacha20
   version: d31a916ded42d1640b9d89a26f8abd53cc96790c
@@ -39,12 +39,16 @@ imports:
   version: 09cded8978dc9e80714c4d85b0322337b0a1e5e0
 - name: github.com/klauspost/crc32
   version: cb6bfca970f6908083f26f39a79009d608efd5cd
+- name: github.com/levigross/connectors
+  version: 5245581a96d060ccf78c666cf7807d3d22a1fb72
+- name: github.com/levigross/gboringssltls
+  version: b0ab3fba5492b4e17a2f711776c1c9444a312c59
 - name: github.com/lucas-clemente/aes12
   version: 25700e67be5c860bcc999137275b9ef8b65932bd
 - name: github.com/lucas-clemente/fnv128a
   version: 393af48d391698c6ae4219566bfbdfef67269997
 - name: github.com/lucas-clemente/quic-go
-  version: 1b8334c3442cdf14424d6716064d30879f6209fe
+  version: 0a825a397df7e71254f3e511a704ebef068d6e75
   subpackages:
   - ackhandler
   - congestion

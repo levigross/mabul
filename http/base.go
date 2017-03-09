@@ -31,22 +31,10 @@ const (
 
 // AttackConfig enables one to configure an attack
 type AttackConfig struct {
+	base.StatefulAttackerConfig
 	HTTPClient string
 	URL        string
 	TLSConfig  *tls.Config
-	// NumThreads is the number of threads we use
-	NumThreads uint
-	// NumConnections is the limit of connections we should have on each thread
-	NumConnections uint
-
-	// Timeout is our thread timeout
-	Timeout time.Duration
-
-	// AttackDuration how long the attack should go for
-	AttackDuration time.Duration
-
-	// ErrorThreshold is the precent of errors we are willing to encounter - -1 means unlimited
-	ErrorThreshold int
 
 	// AttackType the type of attack you wish to execute
 	AttackType AttackType

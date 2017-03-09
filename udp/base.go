@@ -39,10 +39,7 @@ func (a AttackType) DefaultPort() uint16 {
 
 // AttackConfig ...
 type AttackConfig struct {
-	// NumThreads is the number of threads we use
-	NumThreads uint
-	// AttackDuration how long the attack should go for
-	AttackDuration time.Duration
+	base.BasicAttackerConfig
 	// AttackType the type of attack we want
 	AttackType AttackType
 }
