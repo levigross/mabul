@@ -2,6 +2,9 @@
 Mabul is a tool used to test DDoS vectors within controlled envrioments that you have both permission and control over
 and may only be used in that capacity.
 
+#Go Doc
+[![GoDoc](https://godoc.org/github.com/levigross/mabul?status.svg)](https://godoc.org/github.com/levigross/mabul)
+
 # License Exception
 
 You may only use Mabul in a lawful way. Any use of Mabul in an unlawful (in the country where you are,
